@@ -1,0 +1,174 @@
+{
+    "name": "PlayerControls",
+    "maps": [
+        {
+            "name": "APlayerMovement",
+            "id": "5aac0724-c9d6-40e4-a37f-b920101bb0f6",
+            "actions": [
+                {
+                    "name": "LeftJoystickMovement",
+                    "type": "Button",
+                    "id": "b3b9c078-69b8-4c98-9996-100b45613218",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "RightJoystickMovement",
+                    "type": "Button",
+                    "id": "f6d5a8f3-03b8-4cdb-bb0d-6e9106c29ac4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "AButtonPress",
+                    "type": "Button",
+                    "id": "eef13c5c-9449-45f0-8f4f-d9d1503bc49c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold,Tap"
+                },
+                {
+                    "name": "XButtonHold",
+                    "type": "Button",
+                    "id": "2ce575fe-92c7-420f-a914-f85d24194f4c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold"
+                },
+                {
+                    "name": "RTButtonPress",
+                    "type": "Button",
+                    "id": "46223c37-0f22-4f55-b942-f152144271a8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap"
+                },
+                {
+                    "name": "BButtonPress",
+                    "type": "Button",
+                    "id": "5acafbe6-4b97-4436-8463-d07a886b454e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3a8b4cb6-434a-4379-a5ea-9b99aa32d985",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftJoystickMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "35d34e7c-bacf-4df0-9946-bbcd04ad4c04",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightJoystickMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf880a44-9b7d-4d62-a74d-500f13dc942f",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AButtonPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "814da7f5-c72b-4bab-ba59-9b8bacf00879",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "XButtonHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "56518949-4988-4de5-93bd-1580296e406a",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RTButtonPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fff9c571-e31b-488e-9c44-ddadd8946ab2",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BButtonPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "ce8ebc90-734d-4e95-88ec-6f41cfca701e",
+            "actions": [
+                {
+                    "name": "LeftStickMove",
+                    "type": "Button",
+                    "id": "c97560c3-6f2a-46bb-9785-c42cbe2f40d3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "AButtonPress",
+                    "type": "Button",
+                    "id": "35f02ec4-9657-41e0-a567-0e6569b059f7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2540f858-c5c5-4684-bbc4-f3e091416ce0",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftStickMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c68463ae-7440-48e5-8df0-afef489e4782",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AButtonPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

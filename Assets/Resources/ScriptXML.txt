@@ -1,0 +1,18 @@
+  <script>
+	<jaimilyn>
+		<name>Jaimilyn</name>
+		<line>Hi im Jaimilyn</line>
+	</jaimilyn>
+	<jaimilyn1>
+		<name>Jaimilyn</name>
+		<line>Im not too bad, it's pretty hot today though!</line>
+	</jaimilyn1>
+	<jaimilyn2>
+		<name>Jaimilyn</name>
+		<line>Well you're in Tack Land of course!</line>
+	</jaimilyn2>
+	<jaimilyn3>
+		<name>Jaimilyn</name>
+		<line>Bye!</line>
+	</jaimilyn3>
+</script>
