@@ -63,6 +63,7 @@ public class Tutorial : Quest
         {
             objectiveCompleted = false;
             currentStep = 3;
+            StartObjective();
         }
 
 
@@ -76,6 +77,7 @@ public class Tutorial : Quest
         {
             objectiveCompleted = false;
             currentStep = 1;
+            StartObjective();
         }
     }
 
@@ -88,6 +90,7 @@ public class Tutorial : Quest
         {
             objectiveCompleted = false;
             currentStep = 2;
+            StartObjective();
         }
 
     }
@@ -110,5 +113,4 @@ public class Tutorial : Quest
         complete = true;
     }
 
-    
 }

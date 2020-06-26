@@ -33,19 +33,48 @@ public class QuestManager : MonoBehaviour
     {
         
     }
+
+
     void Update()
     {
+       
+
+    }
+
+
+    //Adds a delay when the text plays
+    public IEnumerator DelayQuest(string tempObjective)
+    {
+        yield return new WaitForSeconds(5f);
+
+        switch (tempObjective)
+        {
+            case "tutorial":
+                
+                tutorialQuest.StartObjective();
+
+                break;
+        }
+        yield return null;
+    }
+
+    public void CompleteObjective(string tempObjective)
+    {
+        objective = tempObjective;
         if (objective != "")
         {
             switch (objective)
             {
                 case "tutorial":
-                    tutorialQuest.StartObjective();
+                    tutorialQuest.objectiveCompleted = true;
+                    StopCoroutine(DelayQuest(objective));
+                    StartCoroutine(DelayQuest(objective));
                     break;
             }
         }
-
     }
+
+
     public void GiveQuest()
     {
 

@@ -72,8 +72,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 if (questManager.tutorialQuest.complete == false && questManager.tutorialQuest.currentStep == 2)
                 {
-                    questManager.tutorialQuest.objectiveCompleted = true;
-                    questManager.objective = "tutorial";
+                    questManager.CompleteObjective("tutorial");
                 }
             }
             else{
@@ -85,8 +84,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (questManager.tutorialQuest.complete == false && questManager.tutorialQuest.currentStep == 2)
                 {
-                    questManager.tutorialQuest.objectiveCompleted = true;
-                    questManager.objective = "tutorial";
+                    questManager.CompleteObjective("tutorial");
                 }
             }
 
@@ -131,10 +129,9 @@ public class PlayerMovement : MonoBehaviour
 
         charController.Move(velocity * Time.deltaTime);
 
-        if (questManager.tutorialQuest.complete == false && questManager.tutorialQuest.currentStep == 1 && movingFrontBack > 0)
+        if (questManager.tutorialQuest.complete == false && questManager.tutorialQuest.currentStep == 1 && movingFrontBack > 0 && questManager.tutorialQuest.objectiveCompleted == false)
         {
-            questManager.tutorialQuest.objectiveCompleted = true;
-            questManager.objective = "tutorial";
+            questManager.CompleteObjective("tutorial");
         }
 
 

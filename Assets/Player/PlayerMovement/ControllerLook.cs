@@ -62,11 +62,10 @@ public class ControllerLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
         playerBody.Rotate(Vector3.up * controllerX);
 
-        if (questManager.tutorialQuest.complete == false && questManager.tutorialQuest.currentStep == 0 && (rotationX > 0 || rotationX < 0))
+        if (questManager.tutorialQuest.complete == false && questManager.tutorialQuest.currentStep == 0 && (rotationX > 0 || rotationX < 0) && questManager.tutorialQuest.objectiveCompleted == false)
         {
-            Debug.Log("Lets go");
-            questManager.tutorialQuest.objectiveCompleted = true;
-            questManager.objective = "tutorial";
+            questManager.CompleteObjective("tutorial");
+
         }
 
     }

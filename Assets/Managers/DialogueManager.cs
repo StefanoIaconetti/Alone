@@ -102,8 +102,7 @@ public class DialogueManager : MonoBehaviour
 
                 if (questManager.tutorialQuest.complete == false && questManager.tutorialQuest.currentStep == 3)
                 {
-                    questManager.tutorialQuest.objectiveCompleted = true;
-                    questManager.objective = "tutorial";
+                    questManager.CompleteObjective("tutorial");
                 }
             }
 
