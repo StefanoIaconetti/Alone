@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Tutorial : Quest
 {
+
+    //Quest manager
     QuestManager manager;
    
-
+    //Tutorial values are set
     public Tutorial()
     {
          description = "Lets learn the basics";
@@ -17,16 +19,18 @@ public class Tutorial : Quest
          complete = false;
     }
 
-
+    //Finds the quest manager
     void Start()
     {
         manager = GameObject.Find("Managers/QuestManager").GetComponent<QuestManager>();
     }
     
-    public void StartObjective()
+    //Checks the current step and sets it
+    public void StartNewObjective()
     {
         manager = GameObject.Find("Managers/QuestManager").GetComponent<QuestManager>();
 
+        //Finds what step the user is on and calls its respective method
         switch (currentStep)
         {
             case 0:
@@ -46,6 +50,7 @@ public class Tutorial : Quest
                 break;
         }
         
+        //As long as the current active quest is tutorial itsinformation is displayed and updated
         if (manager.activeQuest == "tutorial")
         {
             manager.title.text = title;
@@ -54,7 +59,7 @@ public class Tutorial : Quest
     }
 
 
-
+    //When the user jumps
     void JumpStep()
     {
         currentObjective = "Jump by pressing the A button";
@@ -63,12 +68,13 @@ public class Tutorial : Quest
         {
             objectiveCompleted = false;
             currentStep = 3;
-            StartObjective();
+            StartNewObjective();
         }
 
 
     }
 
+    //When the user looks using the right thumbstick
     void LookStep()
     {
         currentObjective = "Look by using the right analog stick";
@@ -77,10 +83,11 @@ public class Tutorial : Quest
         {
             objectiveCompleted = false;
             currentStep = 1;
-            StartObjective();
+            StartNewObjective();
         }
     }
 
+    //When the user moves using the left thumbstick 
     void MoveStep()
     {
 
@@ -90,11 +97,12 @@ public class Tutorial : Quest
         {
             objectiveCompleted = false;
             currentStep = 2;
-            StartObjective();
+            StartNewObjective();
         }
 
     }
 
+    //When the user talk to a npc
     void TalkStep()
     {
         currentObjective = "Talk to someone by holding the x button";
@@ -103,10 +111,11 @@ public class Tutorial : Quest
         {
             objectiveCompleted = false;
             currentStep = 4;
-            StartObjective();
+            StartNewObjective();
         }
     }
 
+    //Quest is ended
     new public void EndQuest()
     {
         currentObjective = "Quest Complete!";

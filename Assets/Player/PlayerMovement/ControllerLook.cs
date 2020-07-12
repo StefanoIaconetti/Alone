@@ -62,6 +62,7 @@ public class ControllerLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
         playerBody.Rotate(Vector3.up * controllerX);
 
+        //If the tutorial quest isnt completed and they are on the 0 step
         if (questManager.tutorialQuest.complete == false && questManager.tutorialQuest.currentStep == 0 && (rotationX > 0 || rotationX < 0) && questManager.tutorialQuest.objectiveCompleted == false)
         {
             questManager.CompleteObjective("tutorial");

@@ -49,12 +49,13 @@ public class NPC : MonoBehaviour
             dialogueManager.StartStopMoving(false);
     }
 
-
+    //Resets the currentNPC
     public void ExitReset()
     {
         dialogueManager.currentNPC = null;
     }
 
+    //There are 2 different types of npcs
     public enum NPCType
     {
         NPC,

@@ -20,6 +20,12 @@ public class DialogueManager : MonoBehaviour
     Text choice3Text;
 
 
+    //Texts that will update depending on the npc that the player walks into 
+    Button choice1Button;
+    Button choice2Button;
+    Button choice3Button;
+
+
     public NPC currentNPC;
 
     public NPC.NPCType npcType;
@@ -77,6 +83,11 @@ public class DialogueManager : MonoBehaviour
         choice2Text = GameObject.Find("Canvas/DialogueBox/DialogueOptions/Option2/Text").GetComponent<Text>();
         choice3Text = GameObject.Find("Canvas/DialogueBox/DialogueOptions/Option3/Text").GetComponent<Text>();
 
+        //Grabs the 3 buttons from the buttons so everytime the player has different options when talking to different characters
+        choice1Button = GameObject.Find("Canvas/DialogueBox/DialogueOptions/Option1").GetComponent<Button>();
+        choice2Button = GameObject.Find("Canvas/DialogueBox/DialogueOptions/Option2").GetComponent<Button>();
+        choice3Button = GameObject.Find("Canvas/DialogueBox/DialogueOptions/Option3").GetComponent<Button>();
+
         choice = GameObject.Find("Canvas/DialogueBox/DialogueOptions/Option1");
 
         //Grabs the quest manager
@@ -97,9 +108,11 @@ public class DialogueManager : MonoBehaviour
             //If the player holds X then the dialogue starts
             if (ctx.interaction is HoldInteraction && currentNPC != null)
             {
+                Debug.Log("Talked");
                 //Calls triggered function which starts dialogue
                 Triggered(0);
 
+                //If the tutorial quest is not complete then it is started
                 if (questManager.tutorialQuest.complete == false && questManager.tutorialQuest.currentStep == 3)
                 {
                     questManager.CompleteObjective("tutorial");
@@ -139,9 +152,6 @@ public class DialogueManager : MonoBehaviour
     //When npc is triggered then make dialoge box show
     virtual public void Triggered(int option)
     {
-        //Player cant move now
-        playerMovement.enabled = false;
-
         //Switch case depending on the option pressed
         switch(option){
             //If its the first interaction
@@ -212,6 +222,10 @@ public class DialogueManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             animator.SetBool("IsOpen", false);
             playerMovement.enabled = true;
+            choice1Button.interactable = false;
+            choice2Button.interactable = false;
+            choice3Button.interactable = false;
+
         }
         else
         {
@@ -219,6 +233,9 @@ public class DialogueManager : MonoBehaviour
             //If its true then the player cant move and the text box appears
             animator.SetBool("IsOpen", true);
             playerMovement.enabled = false;
+            choice1Button.interactable = true;
+            choice2Button.interactable = true;
+            choice3Button.interactable = true;
         }
 
     }

@@ -70,6 +70,8 @@ public class PlayerMovement : MonoBehaviour
                     jump = true;
                     jumpHeight *= jumpHeight;
                 }
+
+                //If the tutorial quest isnt completed and they are on the second step
                 if (questManager.tutorialQuest.complete == false && questManager.tutorialQuest.currentStep == 2)
                 {
                     questManager.CompleteObjective("tutorial");
@@ -82,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
                     jump = true;
                 }
 
+                //If the tutorial quest isnt completed and they are on the second step
                 if (questManager.tutorialQuest.complete == false && questManager.tutorialQuest.currentStep == 2)
                 {
                     questManager.CompleteObjective("tutorial");
@@ -129,6 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
         charController.Move(velocity * Time.deltaTime);
 
+        //If the tutorial quest isnt completed and they are on the first step
         if (questManager.tutorialQuest.complete == false && questManager.tutorialQuest.currentStep == 1 && movingFrontBack > 0 && questManager.tutorialQuest.objectiveCompleted == false)
         {
             questManager.CompleteObjective("tutorial");
