@@ -1,0 +1,6 @@
+  <script>
+	<Jaimilyn>
+		<name>Jaimilyn</name>
+		<line>Journal is working</line>
+	</Jaimilyn>
+</script>

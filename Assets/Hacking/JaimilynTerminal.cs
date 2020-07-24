@@ -10,6 +10,7 @@ public class JaimilynTerminal : Terminal
         code = "1018";
         terminalNumber = 0;
         completed = false;
+        journalName = "Jaimilyn";
       }
    
     // Start is called before the first frame update

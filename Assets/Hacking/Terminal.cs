@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Terminal : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Terminal : MonoBehaviour
     public string code = "0000";
     public int terminalNumber;
     public bool completed;
+    public string journalName;
+
 
     void Awake()
     {

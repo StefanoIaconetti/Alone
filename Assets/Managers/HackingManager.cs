@@ -9,14 +9,24 @@ using UnityEngine.EventSystems;
 
 public class HackingManager : MonoBehaviour
 {
-     //Text
-     Text code;
+    //Journal varibles
+    public GameObject journal;
+    public Text journalName;
+    public Text journalText;
+    public Text journalPage;
+
+    //Creating an object of xmlReader
+    XMLReader xmlReader = new XMLReader();
+
+    //Text
+    Text code;
 
      //Grabs the canvas ground of the terminal
      CanvasGroup terminalPanel;
+    CanvasGroup journalPanel;
 
     //Checks to see if the user is accessing
-     public bool isAccessing;
+    public bool isAccessing;
     
     //Creates an object of playercontrols to handle xbox joysticks
     PlayerControls controls;
@@ -44,12 +54,31 @@ public class HackingManager : MonoBehaviour
 
     public Terminal currentTerminal;
 
-    
+    //Name of the file that the journal is on
+    string fileLoadName = @"JournalXML";
+
+    //Creates a text asset 
+    TextAsset xmlFile;
+
+    //Grabs the name and the line
+    protected string[] lineName;
+    string data;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        //Grabs the canvas of the hacking terminal
+        //Loading the xml file as a textAsset
+        var fileRead = (TextAsset)Resources.Load(fileLoadName);
+
+        //xmlFile is now the textasset
+        xmlFile = fileRead;
+
+        //Grabs the canvas group of the journal
+        journalPanel = GameObject.Find("Canvas/Journal").GetComponent<CanvasGroup>();
+
+        //Grabs the canvas group of the hacking terminal
         terminalPanel = GameObject.Find("Canvas/HackingTerminal").GetComponent<CanvasGroup>();
         
         //Grabs the first button of the canvas
@@ -60,6 +89,10 @@ public class HackingManager : MonoBehaviour
 
         //Grabs the player movement so he cant move during dialogue
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+
+        
+        //The data is now the xml.text
+        data = xmlFile.text;
     }
 
     void Awake()
@@ -76,6 +109,10 @@ public class HackingManager : MonoBehaviour
                 {
                     StartStopMoving(true);
                 }
+            }
+            else
+            {
+                ShowJournal();
             }
 
         };
@@ -126,6 +163,8 @@ public class HackingManager : MonoBehaviour
             //Menu dissapears
             terminalPanel.alpha = 0;
 
+            journalPanel.alpha = 0;
+
             //Player cannow move
             playerMovement.enabled = true;
             
@@ -143,8 +182,15 @@ public class HackingManager : MonoBehaviour
             //If the user opens the menu then the first button is set to the eventsystem
             EventSystem.current.SetSelectedGameObject(button);
 
-            //Menu appears
-            terminalPanel.alpha = 1;
+            if(currentTerminal.completed == false)
+            {
+                //Menu appears
+                terminalPanel.alpha = 1;
+            }
+            else
+            {
+                journalPanel.alpha = 1;
+            }
 
             //User cant move
             playerMovement.enabled = false;
@@ -254,8 +300,9 @@ public class HackingManager : MonoBehaviour
     void Access(){
         if (arrayToString.Equals(currentTerminal.code)){
             //If the answer is correct then something will happen
-            StartStopMoving(false);
+            terminalPanel.alpha = 0;
             currentTerminal.completed = true;
+            ShowJournal();
         }
 
     }
@@ -303,6 +350,34 @@ public class HackingManager : MonoBehaviour
 
         return returnVar;
     }
+
+    
+    void ShowJournal()
+    {
+        int pageNumber = 1;
+        StartStopMoving(true);
+        lineName = xmlReader.parseXml(data, currentTerminal.journalName);
+
+        switch (pageNumber)
+        {
+            case 1:
+
+                journalText.text = lineName[1];
+                break;
+
+            case 2:
+
+                journalText.text = lineName[2];
+                break;
+        }
+
+
+
+
+
+    }
+
+
 
 
     //On Enable and disable for button presses
