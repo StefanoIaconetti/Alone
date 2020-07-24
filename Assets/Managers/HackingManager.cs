@@ -42,6 +42,10 @@ public class HackingManager : MonoBehaviour
     //Will hold an array of chars
     char[] charArray;
 
+    public Terminal currentTerminal;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,11 +70,12 @@ public class HackingManager : MonoBehaviour
         //When the player holds X
         controls.APlayerMovement.XButtonHold.performed += ctx =>
         {
-
-            //If the player holds X then the hacking menu opens
-            if (ctx.interaction is HoldInteraction && isAccessing)
-            {
-                StartStopMoving(true);
+            if (currentTerminal.completed == false){
+                //If the player holds X then the hacking menu opens
+                if (ctx.interaction is HoldInteraction && isAccessing)
+                {
+                    StartStopMoving(true);
+                }
             }
 
         };
@@ -100,8 +105,7 @@ public class HackingManager : MonoBehaviour
                 InputNumber('1', true);
                 break;
             case 11:
-                //If 11 is pressed the user is attempting to exit the hack
-                StartStopMoving(false);
+                Access();
                 break;
                 //
             default:
@@ -244,6 +248,16 @@ public class HackingManager : MonoBehaviour
             }
             //Ui text is changed to the new array
             code.text = arrayToString;
+    }
+
+    //Will check if the terminal will open
+    void Access(){
+        if (arrayToString.Equals(currentTerminal.code)){
+            //If the answer is correct then something will happen
+            StartStopMoving(false);
+            currentTerminal.completed = true;
+        }
+
     }
     
     //Char conversion

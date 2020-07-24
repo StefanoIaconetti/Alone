@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JaimilynTerminal : MonoBehaviour
+public class JaimilynTerminal : Terminal
 {
+   
+
+     public JaimilynTerminal() {
+        code = "1018";
+        terminalNumber = 0;
+        completed = false;
+      }
+   
     // Start is called before the first frame update
     void Start()
     {

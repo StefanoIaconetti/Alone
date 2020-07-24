@@ -8,7 +8,9 @@ public class Terminal : MonoBehaviour
     HackingManager hackingManager;
 
     //Each terminal will have their own 4 digit code
-    public int code = "0000";
+    public string code = "0000";
+    public int terminalNumber;
+    public bool completed;
 
     void Awake()
     {
@@ -26,6 +28,7 @@ public class Terminal : MonoBehaviour
         if (character.gameObject.name == "Player")
         {
             hackingManager.isAccessing = true;
+            hackingManager.currentTerminal = this;
         }
     }
 
@@ -33,5 +36,6 @@ public class Terminal : MonoBehaviour
     public void OnTriggerExit(Collider character)
     {
         hackingManager.isAccessing = false;
+        hackingManager.currentTerminal = null;
     }
 }
