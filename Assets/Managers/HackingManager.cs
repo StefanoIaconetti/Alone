@@ -18,6 +18,9 @@ public class HackingManager : MonoBehaviour
     //Creating an object of xmlReader
     XMLReader xmlReader = new XMLReader();
 
+
+    int pageNumber = 1;
+
     //Text
     Text code;
 
@@ -112,11 +115,31 @@ public class HackingManager : MonoBehaviour
             }
             else
             {
-                ShowJournal();
+
+                StartStopMoving(true);
             }
 
         };
 
+        //When the player presses b
+        controls.APlayerMovement.RightDPad.performed += ctx => {
+
+            if (currentTerminal.completed == true)
+            {
+                PageChange(true);
+            }
+
+        };
+
+        //When the player presses b
+        controls.APlayerMovement.LeftDPad.performed += ctx => {
+
+            if (currentTerminal.completed == true)
+            {
+                PageChange(false);
+            }
+
+        };
 
 
         //When the player presses b
@@ -190,6 +213,7 @@ public class HackingManager : MonoBehaviour
             else
             {
                 journalPanel.alpha = 1;
+                PageChange(true);
             }
 
             //User cant move
@@ -197,6 +221,7 @@ public class HackingManager : MonoBehaviour
 
             //Enables the buttons
             EnableDisable(buttonList, true);
+            pageNumber = 0;
         }
     }
 
@@ -302,7 +327,8 @@ public class HackingManager : MonoBehaviour
             //If the answer is correct then something will happen
             terminalPanel.alpha = 0;
             currentTerminal.completed = true;
-            ShowJournal();
+
+            StartStopMoving(true);
         }
 
     }
@@ -352,12 +378,23 @@ public class HackingManager : MonoBehaviour
     }
 
     
-    void ShowJournal()
+
+    void PageChange(bool turn)
     {
-        int pageNumber = 1;
-        StartStopMoving(true);
+
         lineName = xmlReader.parseXml(data, currentTerminal.journalName);
 
+
+        if (turn && pageNumber < 2)
+        {
+            Debug.Log("Increase");
+            pageNumber++;
+        }else if (turn == false && pageNumber > 0){
+            Debug.Log("Increase");
+            pageNumber--;
+        }
+
+        Debug.Log(pageNumber);
         switch (pageNumber)
         {
             case 1:
@@ -366,15 +403,10 @@ public class HackingManager : MonoBehaviour
                 break;
 
             case 2:
-
+                Debug.Log("Worked");
                 journalText.text = lineName[2];
                 break;
         }
-
-
-
-
-
     }
 
 

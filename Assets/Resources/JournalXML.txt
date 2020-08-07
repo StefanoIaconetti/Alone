@@ -2,5 +2,6 @@
 	<Jaimilyn>
 		<name>Jaimilyn</name>
 		<line>Journal is working</line>
+		<secondLine>Journal is kindaa working</secondLine>
 	</Jaimilyn>
 </script>
