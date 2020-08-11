@@ -13,6 +13,7 @@ public class Terminal : MonoBehaviour
     public int terminalNumber;
     public bool completed;
     public string journalName;
+    public int pages;
 
 
     void Awake()

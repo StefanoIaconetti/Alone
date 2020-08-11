@@ -19,7 +19,7 @@ public class HackingManager : MonoBehaviour
     XMLReader xmlReader = new XMLReader();
 
 
-    int pageNumber = 1;
+    int pageNumber = -1;
 
     //Text
     Text code;
@@ -106,14 +106,14 @@ public class HackingManager : MonoBehaviour
         //When the player holds X
         controls.APlayerMovement.XButtonHold.performed += ctx =>
         {
-            if (currentTerminal.completed == false){
+            if (currentTerminal != null && currentTerminal.completed == false){
                 //If the player holds X then the hacking menu opens
                 if (ctx.interaction is HoldInteraction && isAccessing)
                 {
                     StartStopMoving(true);
                 }
             }
-            else
+            else if(currentTerminal != null)
             {
 
                 StartStopMoving(true);
@@ -122,25 +122,27 @@ public class HackingManager : MonoBehaviour
         };
 
         //When the player presses b
-        controls.APlayerMovement.RightDPad.performed += ctx => {
-
-            if (currentTerminal.completed == true)
+            controls.APlayerMovement.RightDPad.performed += ctx =>
             {
-                PageChange(true);
-            }
 
-        };
+                if (currentTerminal != null && currentTerminal.completed == true)
+                {
+                    PageChange(true);
+                }
 
-        //When the player presses b
-        controls.APlayerMovement.LeftDPad.performed += ctx => {
+            };
 
-            if (currentTerminal.completed == true)
+            //When the player presses b
+            controls.APlayerMovement.LeftDPad.performed += ctx =>
             {
-                PageChange(false);
-            }
 
-        };
+                if (currentTerminal != null && currentTerminal.completed == true)
+                {
+                    PageChange(false);
+                }
 
+            };
+       
 
         //When the player presses b
         controls.APlayerMovement.BButtonPress.performed += ctx => {
@@ -221,7 +223,6 @@ public class HackingManager : MonoBehaviour
 
             //Enables the buttons
             EnableDisable(buttonList, true);
-            pageNumber = 0;
         }
     }
 
@@ -260,6 +261,8 @@ public class HackingManager : MonoBehaviour
         //Array is set to 0000 and the ui is aswell 
         arrayToString = "0000";
         code.text = arrayToString;
+
+        pageNumber = -1;
     }
 
      //Method that accepts the numbers given by the user
@@ -381,33 +384,24 @@ public class HackingManager : MonoBehaviour
 
     void PageChange(bool turn)
     {
-
-        lineName = xmlReader.parseXml(data, currentTerminal.journalName);
-
-
-        if (turn && pageNumber < 2)
+        //Turns the pages either left and right depending on if false or true is given
+        if (turn &&  pageNumber < currentTerminal.pages - 1)
         {
-            Debug.Log("Increase");
             pageNumber++;
-        }else if (turn == false && pageNumber > 0){
-            Debug.Log("Increase");
+        }else if (!turn && pageNumber > 0)
+        {
             pageNumber--;
         }
-
-        Debug.Log(pageNumber);
-        switch (pageNumber)
-        {
-            case 1:
-
-                journalText.text = lineName[1];
-                break;
-
-            case 2:
-                Debug.Log("Worked");
-                journalText.text = lineName[2];
-                break;
-        }
+        
+        //Text is gathered and put on the journal
+        lineName = xmlReader.parseXml(data, currentTerminal.journalName + pageNumber);
+        journalText.text = lineName[1];
+        
+        string pageNum = pageNumber + 1 + "";
+        journalPage.text = pageNum;
     }
+
+    
 
 
 

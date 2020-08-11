@@ -11,6 +11,7 @@ public class JaimilynTerminal : Terminal
         terminalNumber = 0;
         completed = false;
         journalName = "Jaimilyn";
+        pages = 2;
       }
    
     // Start is called before the first frame update

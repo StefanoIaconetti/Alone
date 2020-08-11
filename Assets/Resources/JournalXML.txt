@@ -1,7 +1,10 @@
   <script>
-	<Jaimilyn>
+	<Jaimilyn0>
 		<name>Jaimilyn</name>
-		<line>Journal is working</line>
-		<secondLine>Journal is kindaa working</secondLine>
-	</Jaimilyn>
+		<line>Day 1:</line>
+	</Jaimilyn0>
+	<Jaimilyn1>
+		<name>Jaimilyn</name>
+		<line>Day 2:</line>
+	</Jaimilyn1>
 </script>
