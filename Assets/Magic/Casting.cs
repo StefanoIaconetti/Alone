@@ -5,15 +5,20 @@ using UnityEngine;
 public class Casting : MonoBehaviour
 {
 
-
-
     //Creates an object of playercontrols to handle xbox joysticks
     PlayerControls controls;
 
+    public GameObject elementalOrb;
+
+    public GameObject bulletPrefab;
+    //Position of barrel
+    public Transform launchPosition;
+
+    //Vector
+    Vector3 objectPos;
+
     //Grabs the animator
     public Animator animator;
-
-
 
     void Start()
     {
@@ -29,10 +34,37 @@ public class Casting : MonoBehaviour
         //When the player holds X
         controls.APlayerMovement.RTButtonPress.performed += ctx =>
         {
-            Debug.Log("Cast");
-            animator.SetTrigger("canCast");
-            //animator.SetBool("canCast", false);
+            IsCasting();
         };
+
+    }
+
+
+
+    void IsCasting()
+    {
+
+
+        GameObject bullet = OrbShot.SharedInstance.GetPooledObject();
+
+        if (bullet != null)
+        {
+            bullet.transform.position = launchPosition.position;
+
+            bullet.SetActive(true);
+            bullet.GetComponent<Rigidbody>().velocity = transform.parent.forward * 100;
+
+        }
+
+
+
+
+
+
+
+
+
+        animator.SetTrigger("canCast");
 
     }
         //On Enable and disable for button presses
