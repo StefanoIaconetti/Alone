@@ -17,6 +17,7 @@ public class Tutorial : Quest
          currentObjective = "";
          objectiveCompleted = false;
          complete = false;
+        congratsDesc = "Congratulations on finishing the tutorial!";
     }
 
     //Finds the quest manager
@@ -120,6 +121,7 @@ public class Tutorial : Quest
     {
         currentObjective = "Quest Complete!";
         complete = true;
+        manager.QuestCompleted("tutorial");
     }
 
 }

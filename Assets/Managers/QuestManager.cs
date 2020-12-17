@@ -21,6 +21,12 @@ public class QuestManager : MonoBehaviour
     public Text title;
     public Text step;
 
+    public Image questStepChange;
+
+    //For the congrtulations screen
+    public Text congratDesc;
+    public CanvasGroup congrats;
+
     void Start()
     {
         //Sets the title and step
@@ -44,10 +50,15 @@ public class QuestManager : MonoBehaviour
         switch (tempObjective)
         {
             case "tutorial":
+                //FFFFFF
+                 questStepChange.color = new Color32(255, 255, 255, 255);
                 tutorialQuest.StartNewObjective();
 
                 break;
         }
+
+
+
         yield return null;
     }
 
@@ -63,12 +74,44 @@ public class QuestManager : MonoBehaviour
             {
                 case "tutorial":
                     tutorialQuest.objectiveCompleted = true;
+                    questStepChange.color = new Color32(0, 230, 118, 255);
                     StopCoroutine(DelayQuest(objective));
                     StartCoroutine(DelayQuest(objective));
                     break;
             }
         }
     }
+
+
+
+    //Adds a delay when the text plays
+    public IEnumerator CongratulationTimer()
+    {
+        //Waits for 5 seconds
+        yield return new WaitForSeconds(5f);
+        congrats.alpha = 0;
+
+        yield return null;
+    }
+
+    public void QuestCompleted(string tempObjective)
+    {
+        //Switch case through the quests
+        switch (tempObjective)
+        {
+            case "tutorial":
+
+               
+
+                congratDesc.text = tutorialQuest.congratsDesc;
+                    congrats.alpha = 1;
+                
+                    StopCoroutine(CongratulationTimer());
+                    StartCoroutine(CongratulationTimer());
+                break;
+        }
+    }
+    
 
 
     public void GiveQuest()

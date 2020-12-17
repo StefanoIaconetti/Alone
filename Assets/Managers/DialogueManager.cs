@@ -108,7 +108,6 @@ public class DialogueManager : MonoBehaviour
             //If the player holds X then the dialogue starts
             if (ctx.interaction is HoldInteraction && currentNPC != null)
             {
-                Debug.Log("Talked");
                 //Calls triggered function which starts dialogue
                 Triggered(0);
 

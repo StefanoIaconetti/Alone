@@ -5,11 +5,12 @@ using UnityEngine;
 public class Quest
 {
      public string description;
+     public string congratsDesc;
      public string title;
      public int currentStep;
-    public string currentObjective;
-    public bool objectiveCompleted;
-    public bool complete;
+     public string currentObjective;
+     public bool objectiveCompleted;
+     public bool complete;
     
     
 
