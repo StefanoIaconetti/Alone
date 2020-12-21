@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class OrbShot : MonoBehaviour
 {
-    public List<GameObject> pooledObjects;
-    public GameObject objectToPool;
-    public int amountToPool;
-
+    
+    public GameObject orb;
+    int amntOfOrbs = 2;
+    public List<GameObject> orbShots;
 
     public static OrbShot SharedInstance;
 
@@ -20,19 +20,16 @@ public class OrbShot : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        pooledObjects = new List<GameObject>();
-        for (int i = 0; i < amountToPool; i++)
+        //Making a list of orbs
+        orbShots = new List<GameObject>();
+
+        //Instantiating the orbs
+        for (int i = 0; i < amntOfOrbs; i++)
         {
-            GameObject obj = (GameObject)Instantiate(objectToPool);
+            GameObject obj = (GameObject)Instantiate(orb);
             obj.SetActive(false);
-            pooledObjects.Add(obj);
+            orbShots.Add(obj);
         }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 
@@ -46,18 +43,14 @@ public class OrbShot : MonoBehaviour
     }
 
 
-    public GameObject GetPooledObject()
-    {
-
-        for (int i = 0; i < pooledObjects.Count; i++)
-        {
-
-            if (!pooledObjects[i].activeInHierarchy)
-            {
-                return pooledObjects[i];
+    //Grabbing the next available orb
+    public GameObject GrabOrb(){
+        //Going through the list
+        for (int i = 0; i < orbShots.Count; i++) {
+            if (!orbShots[i].activeInHierarchy){
+                return orbShots[i];
             }
         }
-
         return null;
     }
 }

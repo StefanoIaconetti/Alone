@@ -23,7 +23,7 @@ public class Casting : MonoBehaviour
     void Start()
     {
         //Grabs the animator off of the DialogueBox
-        animator = GameObject.Find("Player/Staff").GetComponent<Animator>();
+        animator = GameObject.Find("Player/Camera/Staff").GetComponent<Animator>();
     }
 
     void Awake()
@@ -41,34 +41,40 @@ public class Casting : MonoBehaviour
 
 
 
-    void IsCasting()
-    {
+    void IsCasting(){
 
+        GameObject orb = OrbShot.SharedInstance.GrabOrb();
+        if (orb != null) {
 
-        GameObject bullet = OrbShot.SharedInstance.GetPooledObject();
+            if (orb != null) {
+                orb.transform.position = launchPosition.position;
 
-        if (bullet != null)
-        {
-            bullet.transform.position = launchPosition.position;
+                orb.SetActive(true);
+                orb.GetComponent<Rigidbody>().velocity = transform.parent.forward * 100;
 
-            bullet.SetActive(true);
-            bullet.GetComponent<Rigidbody>().velocity = transform.parent.forward * 100;
+            }
+            animator.SetTrigger("canCast");
 
+            StopCoroutine(DelayInactive(orb));
+            StartCoroutine(DelayInactive(orb));
         }
-
-
-
-
-
-
-
-
-
-        animator.SetTrigger("canCast");
-
     }
-        //On Enable and disable for button presses
-        void OnEnable()
+
+
+    //Adds a delay when the text plays
+    public IEnumerator DelayInactive(GameObject orb)
+    {
+        //Waits for 5 seconds
+        yield return new WaitForSeconds(3f);
+
+        orb.SetActive(false);
+
+
+        yield return null;
+    }
+
+    //On Enable and disable for button presses
+    void OnEnable()
     {
         controls.APlayerMovement.Enable();
     }
