@@ -43,6 +43,7 @@ public class Casting : MonoBehaviour
     void IsCasting(){
 
         GameObject orb = OrbShot.SharedInstance.GrabOrb();
+
         if (orb != null) {
 
             if (orb != null) {
