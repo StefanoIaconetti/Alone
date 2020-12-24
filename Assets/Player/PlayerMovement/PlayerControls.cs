@@ -81,6 +81,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Tap""
+                },
+                {
+                    ""name"": ""LeftBumperHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""5c7aa5e9-23b0-4cbc-be87-70c3afa75f60"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold""
                 }
             ],
             ""bindings"": [
@@ -171,6 +179,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""LeftDPad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22a8188d-d49f-4fb7-a678-87c220b15f56"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftBumperHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -233,6 +252,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_APlayerMovement_BButtonPress = m_APlayerMovement.FindAction("BButtonPress", throwIfNotFound: true);
         m_APlayerMovement_RightDPad = m_APlayerMovement.FindAction("RightDPad", throwIfNotFound: true);
         m_APlayerMovement_LeftDPad = m_APlayerMovement.FindAction("LeftDPad", throwIfNotFound: true);
+        m_APlayerMovement_LeftBumperHold = m_APlayerMovement.FindAction("LeftBumperHold", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_LeftStickMove = m_UI.FindAction("LeftStickMove", throwIfNotFound: true);
@@ -294,6 +314,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_APlayerMovement_BButtonPress;
     private readonly InputAction m_APlayerMovement_RightDPad;
     private readonly InputAction m_APlayerMovement_LeftDPad;
+    private readonly InputAction m_APlayerMovement_LeftBumperHold;
     public struct APlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -306,6 +327,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @BButtonPress => m_Wrapper.m_APlayerMovement_BButtonPress;
         public InputAction @RightDPad => m_Wrapper.m_APlayerMovement_RightDPad;
         public InputAction @LeftDPad => m_Wrapper.m_APlayerMovement_LeftDPad;
+        public InputAction @LeftBumperHold => m_Wrapper.m_APlayerMovement_LeftBumperHold;
         public InputActionMap Get() { return m_Wrapper.m_APlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -339,6 +361,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @LeftDPad.started -= m_Wrapper.m_APlayerMovementActionsCallbackInterface.OnLeftDPad;
                 @LeftDPad.performed -= m_Wrapper.m_APlayerMovementActionsCallbackInterface.OnLeftDPad;
                 @LeftDPad.canceled -= m_Wrapper.m_APlayerMovementActionsCallbackInterface.OnLeftDPad;
+                @LeftBumperHold.started -= m_Wrapper.m_APlayerMovementActionsCallbackInterface.OnLeftBumperHold;
+                @LeftBumperHold.performed -= m_Wrapper.m_APlayerMovementActionsCallbackInterface.OnLeftBumperHold;
+                @LeftBumperHold.canceled -= m_Wrapper.m_APlayerMovementActionsCallbackInterface.OnLeftBumperHold;
             }
             m_Wrapper.m_APlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -367,6 +392,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @LeftDPad.started += instance.OnLeftDPad;
                 @LeftDPad.performed += instance.OnLeftDPad;
                 @LeftDPad.canceled += instance.OnLeftDPad;
+                @LeftBumperHold.started += instance.OnLeftBumperHold;
+                @LeftBumperHold.performed += instance.OnLeftBumperHold;
+                @LeftBumperHold.canceled += instance.OnLeftBumperHold;
             }
         }
     }
@@ -422,6 +450,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnBButtonPress(InputAction.CallbackContext context);
         void OnRightDPad(InputAction.CallbackContext context);
         void OnLeftDPad(InputAction.CallbackContext context);
+        void OnLeftBumperHold(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

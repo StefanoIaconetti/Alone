@@ -7,8 +7,7 @@ public class Casting : MonoBehaviour
 
     //Creates an object of playercontrols to handle xbox joysticks
     PlayerControls controls;
-
-    public GameObject elementalOrb;
+    
 
     public GameObject bulletPrefab;
     //Position of barrel
