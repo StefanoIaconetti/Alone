@@ -14,10 +14,10 @@ public class SpellManager : MonoBehaviour
     public GameObject eventSystemDisable;
     public GameObject MainEventSystem;
 
-    Button airButton;
-    Button fireButton;
-    Button earthButton;
-    Button waterButton;
+    public Button airButton;
+    public Button fireButton;
+    public Button earthButton;
+    public Button waterButton;
 
 
     void Awake()
@@ -28,26 +28,29 @@ public class SpellManager : MonoBehaviour
         //When the player holds Left Bumper
         controls.APlayerMovement.LeftBumperHold.performed += ctx =>
         {
+            ButtonOnOff(true);
             MainEventSystem.active = false;
             eventSystemDisable.active = true;
             SpellHotBar.alpha = 1;
 
             //Eventsystem is now null so user can use other buttons
             eventSystem.SetSelectedGameObject(currentButton);
-            Debug.Log("IsHolding");
         };
 
         //When the player lets go of the left bumper
         controls.APlayerMovement.LeftBumperHold.canceled += ctx =>
         {
+            ButtonOnOff(false);
             MainEventSystem.active = true;
             eventSystemDisable.active = false;
             SpellHotBar.alpha = 0;
 
             //Eventsystem is now null so user can use other buttons
             eventSystem.SetSelectedGameObject(null);
-            Debug.Log("IsntHolding");
-         
+
+            //Quick bug fix, the event system stopped working and turning it off and on seemed to be a work around when using multiple event systems
+            MainEventSystem.active = false;
+            MainEventSystem.active = true;
 
 
         };
@@ -55,7 +58,24 @@ public class SpellManager : MonoBehaviour
 
     }
 
-
+    void ButtonOnOff(bool onOff)
+    {
+        if (onOff)
+        {
+            airButton.interactable = true;
+            fireButton.interactable = true;
+            earthButton.interactable = true;
+            waterButton.interactable = true;
+        }
+        else
+        {
+            airButton.interactable = false;
+            fireButton.interactable = false;
+            earthButton.interactable = false;
+            waterButton.interactable = false;
+        }
+        
+    }
 
 
 
