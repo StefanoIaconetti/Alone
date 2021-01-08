@@ -54,4 +54,15 @@ public class OrbShot : MonoBehaviour
         }
         return null;
     }
+
+
+    //Loops and changes the materials of all the orbs
+    public void ChangeElement(Material material)
+    {
+        for (int i = 0; i < orbShots.Count; i++)
+        {
+                orbShots[i].GetComponent<MeshRenderer>().material = material;
+           
+        }
+    }
 }
