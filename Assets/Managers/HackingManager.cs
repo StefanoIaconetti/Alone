@@ -251,18 +251,21 @@ public class HackingManager : MonoBehaviour
     //Reset will reset the previous input
     void Reset()
     {
-        //Loops through the array setting all values to 0
-        for (int i = 0; i < charArray.Length; i++)
+        if (charArray != null)
         {
-            charArray[i] = '0';
-        }
-        //Input number is reset to 0
-        inputNumber = 0;
-        //Array is set to 0000 and the ui is aswell 
-        arrayToString = "0000";
-        code.text = arrayToString;
+            //Loops through the array setting all values to 0
+            for (int i = 0; i < charArray.Length; i++)
+            {
+                charArray[i] = '0';
+            }
+            //Input number is reset to 0
+            inputNumber = 0;
+            //Array is set to 0000 and the ui is aswell 
+            arrayToString = "0000";
+            code.text = arrayToString;
 
-        pageNumber = -1;
+            pageNumber = -1;
+        }
     }
 
      //Method that accepts the numbers given by the user

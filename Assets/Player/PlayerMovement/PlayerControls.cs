@@ -81,6 +81,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Tap""
+                },
+                {
+                    ""name"": ""LeftBumperHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""5c7aa5e9-23b0-4cbc-be87-70c3afa75f60"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold""
                 }
             ],
             ""bindings"": [
@@ -171,6 +179,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""LeftDPad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22a8188d-d49f-4fb7-a678-87c220b15f56"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftBumperHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -191,6 +210,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""35f02ec4-9657-41e0-a567-0e6569b059f7"",
                     ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DPadMove"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6c6a272d-cf29-4f09-bd1b-412f0052684f"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -217,6 +244,61 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""AButtonPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""a96f48f6-9abb-41b8-87b1-9507964a9065"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPadMove"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""7f91ba31-7241-4979-a3b2-d269bdb3445a"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPadMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""0418e621-246c-4d11-b95c-6af8ea29c99c"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPadMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""fdbc6b99-6f47-4d21-b269-16e3e9e1722b"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPadMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""e43af1a0-be96-48d4-8eb3-800839868e54"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPadMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -233,10 +315,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_APlayerMovement_BButtonPress = m_APlayerMovement.FindAction("BButtonPress", throwIfNotFound: true);
         m_APlayerMovement_RightDPad = m_APlayerMovement.FindAction("RightDPad", throwIfNotFound: true);
         m_APlayerMovement_LeftDPad = m_APlayerMovement.FindAction("LeftDPad", throwIfNotFound: true);
+        m_APlayerMovement_LeftBumperHold = m_APlayerMovement.FindAction("LeftBumperHold", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_LeftStickMove = m_UI.FindAction("LeftStickMove", throwIfNotFound: true);
         m_UI_AButtonPress = m_UI.FindAction("AButtonPress", throwIfNotFound: true);
+        m_UI_DPadMove = m_UI.FindAction("DPadMove", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -294,6 +378,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_APlayerMovement_BButtonPress;
     private readonly InputAction m_APlayerMovement_RightDPad;
     private readonly InputAction m_APlayerMovement_LeftDPad;
+    private readonly InputAction m_APlayerMovement_LeftBumperHold;
     public struct APlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -306,6 +391,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @BButtonPress => m_Wrapper.m_APlayerMovement_BButtonPress;
         public InputAction @RightDPad => m_Wrapper.m_APlayerMovement_RightDPad;
         public InputAction @LeftDPad => m_Wrapper.m_APlayerMovement_LeftDPad;
+        public InputAction @LeftBumperHold => m_Wrapper.m_APlayerMovement_LeftBumperHold;
         public InputActionMap Get() { return m_Wrapper.m_APlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -339,6 +425,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @LeftDPad.started -= m_Wrapper.m_APlayerMovementActionsCallbackInterface.OnLeftDPad;
                 @LeftDPad.performed -= m_Wrapper.m_APlayerMovementActionsCallbackInterface.OnLeftDPad;
                 @LeftDPad.canceled -= m_Wrapper.m_APlayerMovementActionsCallbackInterface.OnLeftDPad;
+                @LeftBumperHold.started -= m_Wrapper.m_APlayerMovementActionsCallbackInterface.OnLeftBumperHold;
+                @LeftBumperHold.performed -= m_Wrapper.m_APlayerMovementActionsCallbackInterface.OnLeftBumperHold;
+                @LeftBumperHold.canceled -= m_Wrapper.m_APlayerMovementActionsCallbackInterface.OnLeftBumperHold;
             }
             m_Wrapper.m_APlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -367,6 +456,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @LeftDPad.started += instance.OnLeftDPad;
                 @LeftDPad.performed += instance.OnLeftDPad;
                 @LeftDPad.canceled += instance.OnLeftDPad;
+                @LeftBumperHold.started += instance.OnLeftBumperHold;
+                @LeftBumperHold.performed += instance.OnLeftBumperHold;
+                @LeftBumperHold.canceled += instance.OnLeftBumperHold;
             }
         }
     }
@@ -377,12 +469,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_LeftStickMove;
     private readonly InputAction m_UI_AButtonPress;
+    private readonly InputAction m_UI_DPadMove;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
         public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @LeftStickMove => m_Wrapper.m_UI_LeftStickMove;
         public InputAction @AButtonPress => m_Wrapper.m_UI_AButtonPress;
+        public InputAction @DPadMove => m_Wrapper.m_UI_DPadMove;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -398,6 +492,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @AButtonPress.started -= m_Wrapper.m_UIActionsCallbackInterface.OnAButtonPress;
                 @AButtonPress.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnAButtonPress;
                 @AButtonPress.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnAButtonPress;
+                @DPadMove.started -= m_Wrapper.m_UIActionsCallbackInterface.OnDPadMove;
+                @DPadMove.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnDPadMove;
+                @DPadMove.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnDPadMove;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -408,6 +505,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @AButtonPress.started += instance.OnAButtonPress;
                 @AButtonPress.performed += instance.OnAButtonPress;
                 @AButtonPress.canceled += instance.OnAButtonPress;
+                @DPadMove.started += instance.OnDPadMove;
+                @DPadMove.performed += instance.OnDPadMove;
+                @DPadMove.canceled += instance.OnDPadMove;
             }
         }
     }
@@ -422,10 +522,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnBButtonPress(InputAction.CallbackContext context);
         void OnRightDPad(InputAction.CallbackContext context);
         void OnLeftDPad(InputAction.CallbackContext context);
+        void OnLeftBumperHold(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnLeftStickMove(InputAction.CallbackContext context);
         void OnAButtonPress(InputAction.CallbackContext context);
+        void OnDPadMove(InputAction.CallbackContext context);
     }
 }

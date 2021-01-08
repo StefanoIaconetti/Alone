@@ -47,10 +47,22 @@ public class OrbShot : MonoBehaviour
     public GameObject GrabOrb(){
         //Going through the list
         for (int i = 0; i < orbShots.Count; i++) {
-            if (!orbShots[i].activeInHierarchy){
+            if (!orbShots[i].activeInHierarchy)
+            {
                 return orbShots[i];
             }
         }
         return null;
+    }
+
+
+    //Loops and changes the materials of all the orbs
+    public void ChangeElement(Material material)
+    {
+        for (int i = 0; i < orbShots.Count; i++)
+        {
+                orbShots[i].GetComponent<MeshRenderer>().material = material;
+           
+        }
     }
 }
