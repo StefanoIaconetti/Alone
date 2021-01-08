@@ -42,8 +42,9 @@ GameObject:
   - component: {fileID: 8105532825556001670}
   - component: {fileID: 44482322503145924}
   - component: {fileID: 5937160471149415076}
-  - component: {fileID: 24025476}
   - component: {fileID: 24025475}
+  - component: {fileID: 24025476}
+  - component: {fileID: 7336560658947114572}
   m_Layer: 0
   m_Name: Staff
   m_TagString: Untagged
@@ -130,6 +131,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &24025475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3541982219533569221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f7b745a826b004ab011e6f107bd7fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 6020587134622999707, guid: 81fb1d9910440484bb253a512d4b64a4,
+    type: 3}
+  launchPosition: {fileID: 8104636894946899255}
+  animator: {fileID: 0}
 --- !u!95 &24025476
 Animator:
   serializedVersion: 3
@@ -149,7 +166,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &24025475
+--- !u!114 &7336560658947114572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,7 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 6020587134622999707, guid: 81fb1d9910440484bb253a512d4b64a4,
     type: 3}
-  launchPosition: {fileID: 8104636894946899255}
+  launchPosition: {fileID: 9108612033657087349}
   animator: {fileID: 0}
 --- !u!1 &5257927506403342246
 GameObject:

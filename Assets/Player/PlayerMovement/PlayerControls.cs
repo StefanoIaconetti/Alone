@@ -212,6 +212,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DPadMove"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6c6a272d-cf29-4f09-bd1b-412f0052684f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -236,6 +244,61 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""AButtonPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""a96f48f6-9abb-41b8-87b1-9507964a9065"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPadMove"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""7f91ba31-7241-4979-a3b2-d269bdb3445a"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPadMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""0418e621-246c-4d11-b95c-6af8ea29c99c"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPadMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""fdbc6b99-6f47-4d21-b269-16e3e9e1722b"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPadMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""e43af1a0-be96-48d4-8eb3-800839868e54"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DPadMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -257,6 +320,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_LeftStickMove = m_UI.FindAction("LeftStickMove", throwIfNotFound: true);
         m_UI_AButtonPress = m_UI.FindAction("AButtonPress", throwIfNotFound: true);
+        m_UI_DPadMove = m_UI.FindAction("DPadMove", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -405,12 +469,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_LeftStickMove;
     private readonly InputAction m_UI_AButtonPress;
+    private readonly InputAction m_UI_DPadMove;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
         public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @LeftStickMove => m_Wrapper.m_UI_LeftStickMove;
         public InputAction @AButtonPress => m_Wrapper.m_UI_AButtonPress;
+        public InputAction @DPadMove => m_Wrapper.m_UI_DPadMove;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -426,6 +492,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @AButtonPress.started -= m_Wrapper.m_UIActionsCallbackInterface.OnAButtonPress;
                 @AButtonPress.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnAButtonPress;
                 @AButtonPress.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnAButtonPress;
+                @DPadMove.started -= m_Wrapper.m_UIActionsCallbackInterface.OnDPadMove;
+                @DPadMove.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnDPadMove;
+                @DPadMove.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnDPadMove;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -436,6 +505,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @AButtonPress.started += instance.OnAButtonPress;
                 @AButtonPress.performed += instance.OnAButtonPress;
                 @AButtonPress.canceled += instance.OnAButtonPress;
+                @DPadMove.started += instance.OnDPadMove;
+                @DPadMove.performed += instance.OnDPadMove;
+                @DPadMove.canceled += instance.OnDPadMove;
             }
         }
     }
@@ -456,5 +528,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnLeftStickMove(InputAction.CallbackContext context);
         void OnAButtonPress(InputAction.CallbackContext context);
+        void OnDPadMove(InputAction.CallbackContext context);
     }
 }

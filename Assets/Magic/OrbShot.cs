@@ -47,7 +47,8 @@ public class OrbShot : MonoBehaviour
     public GameObject GrabOrb(){
         //Going through the list
         for (int i = 0; i < orbShots.Count; i++) {
-            if (!orbShots[i].activeInHierarchy){
+            if (!orbShots[i].activeInHierarchy)
+            {
                 return orbShots[i];
             }
         }

@@ -7,7 +7,8 @@ public class Casting : MonoBehaviour
 
     //Creates an object of playercontrols to handle xbox joysticks
     PlayerControls controls;
-    
+
+    public GameObject elementalOrb;
 
     public GameObject bulletPrefab;
     //Position of barrel
@@ -43,7 +44,6 @@ public class Casting : MonoBehaviour
     void IsCasting(){
 
         GameObject orb = OrbShot.SharedInstance.GrabOrb();
-
         if (orb != null) {
 
             if (orb != null) {
